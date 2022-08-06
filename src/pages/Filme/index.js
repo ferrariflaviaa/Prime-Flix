@@ -23,7 +23,7 @@ function Filme() {
                 })
                 .catch(() => {
                     console.log("FILME NÃO ENCOTRANDO");
-                    navigation("/", {replace: true});
+                    navigation("/", { replace: true });
                     return;
                 })
         }
@@ -32,8 +32,23 @@ function Filme() {
         return () => {
             console.log("COMPONENTE FOI DESMONTADO")
         }
-    }, [navigation, id])
+    }, [navigation, id]);
 
+    function SalvarFilme() {
+        const minhaLista = localStorage.getItem("@primeflix");
+
+        let filmesSalvos = JSON.parse(minhaLista) || [];
+
+        const hasfilme = filmesSalvos.some((filmesSalvos) => filmesSalvos.id === filme.id);
+
+        if (hasfilme) {
+            alert("ESSE FILME JA ESTA NA LISTA");
+            return;
+        }
+        filmesSalvos.push(filme);
+        localStorage.setItem("@primeflix", JSON.stringify(filmesSalvos));
+        alert("FILME SALVO COM SUCESSO!");
+    }
     if (loading) {
         return (
             <div className='filme-info'>
@@ -49,15 +64,13 @@ function Filme() {
             <span>{filme.overview}</span>
             <strong>Avalição: {filme.vote_average.toFixed(1)} / 10</strong>
             <div className='area-buttons '>
-                <button>Salvar</button>
+                <button onClick={SalvarFilme}>Salvar</button>
                 <button>
-                <a target="_blank" rel="external" href={`https://youtube.com/results?search_query=${filme.title} Trailer`}>
-                    Trailer
-                </a>
+                    <a target="blank" rel="external" href={`https://youtube.com/results?search_query=${filme.title} Trailer`}>
+                        Trailer
+                    </a>
                 </button>
-
             </div>
-
         </div>
     )
 }
