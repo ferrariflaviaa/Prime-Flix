@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api"
 import "./styled.css";
 
 
 function Filme() {
     const { id } = useParams();
+    const navigation = useNavigate();
     const [filme, setFilmes] = useState({});
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -21,7 +22,9 @@ function Filme() {
                     setLoading(false);
                 })
                 .catch(() => {
-                    console.log("FILME NÃO ENCOTRANDO")
+                    console.log("FILME NÃO ENCOTRANDO");
+                    navigation("/", {replace: true});
+                    return;
                 })
         }
         loadFilme();
@@ -29,7 +32,7 @@ function Filme() {
         return () => {
             console.log("COMPONENTE FOI DESMONTADO")
         }
-    }, [])
+    }, [navigation, id])
 
     if (loading) {
         return (
@@ -48,9 +51,9 @@ function Filme() {
             <div className='area-buttons '>
                 <button>Salvar</button>
                 <button>
-                    <a href="#">
-                        Treiler
-                    </a>;
+                <a target="_blank" rel="external" href={`https://youtube.com/results?search_query=${filme.title} Trailer`}>
+                    Trailer
+                </a>
                 </button>
 
             </div>
