@@ -1,7 +1,7 @@
 Venho apresentar a vocês esse site de filmes onde podemos ver a sinopse, nota de avaliação, trailer e favoritar filmes.
 Feito com a biblioteca ReactJS e utilizando a API themoviedb, para carregar os dados relacionados ao filme, além de também usar o localStorage para armazenar os filmes marcados com favorito durante o uso da aplicação.
 
-link: https://primeflix-projeto.netlify.app/
+link: https://primeflix-projeto.netlify.app/ 
 
 
 ![image](https://user-images.githubusercontent.com/88516203/184997136-23314d77-0ac1-4ecb-9cee-97eb5d7738dd.png)
